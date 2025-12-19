@@ -1,11 +1,15 @@
 "use client";
-import React, { useState } from "react";
-import { Users, TrendingUp, AlertTriangle, CheckCircle, Loader, ArrowRight, Shield, Target, Heart, Sparkles } from "lucide-react";
+import React, { useState, useEffect } from "react";
+import { useRouter } from "next/navigation";
+import { Users, TrendingUp, AlertTriangle, CheckCircle, Loader, ArrowRight, Shield, Target, Heart, Sparkles, LogOut } from "lucide-react";
 
 function PredictionPage() {
+  const router = useRouter();
   const [loading, setLoading] = useState(false);
   const [result, setResult] = useState(null);
   const [error, setError] = useState('');
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [isVerifying, setIsVerifying] = useState(true);
   
   const [formData, setFormData] = useState({
     Age: '',
@@ -37,6 +41,50 @@ function PredictionPage() {
     YearsSinceLastPromotion: '',
     YearsWithCurrManager: ''
   });
+
+  // Verify token on component mount
+  useEffect(() => {
+    const verifyToken = async () => {
+      try {
+        const response = await fetch('/api/auth/verifyToken', {
+          method: 'GET',
+          credentials: 'include',
+        });
+
+        if (response.ok) {
+          setIsAuthenticated(true);
+        } else {
+          router.push('/Login');
+        }
+      } catch (err) {
+        console.error('Token verification error:', err);
+        router.push('/Login');
+      } finally {
+        setIsVerifying(false);
+      }
+    };
+
+    verifyToken();
+  }, [router]);
+
+  // Logout handler
+  const handleLogout = async () => {
+    try {
+      const response = await fetch('/api/auth/logout', {
+        method: 'POST',
+        credentials: 'include',
+      });
+
+      if (response.ok) {
+        router.push('/Login');
+      } else {
+        setError('Logout failed. Please try again.');
+      }
+    } catch (err) {
+      console.error('Logout error:', err);
+      setError('Network error during logout.');
+    }
+  };
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -83,6 +131,7 @@ function PredictionPage() {
         headers: {
           'Content-Type': 'application/json',
         },
+        credentials: 'include',
         body: JSON.stringify(payload)
       });
 
@@ -109,11 +158,36 @@ function PredictionPage() {
 
   const riskPercentage = getRiskProbability();
 
+  // Show loading screen while verifying authentication
+  if (isVerifying) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center">
+        <div className="text-center">
+          <Loader className="w-12 h-12 text-white animate-spin mx-auto mb-4" />
+          <p className="text-white text-lg">Verifying authentication...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Only render the page if authenticated
+  if (!isAuthenticated) {
+    return null;
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
-        {/* Header */}
-        <div className="mb-8 text-center">
+        {/* Header with Logout Button */}
+        <div className="mb-8 text-center relative">
+          <button
+            onClick={handleLogout}
+            className="absolute top-0 right-0 flex items-center space-x-2 px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-xl font-semibold transition-all duration-200 shadow-lg hover:shadow-xl"
+          >
+            <LogOut className="w-5 h-5" />
+            <span>Logout</span>
+          </button>
+
           <div className="flex items-center justify-center space-x-3 mb-3">
             <div className="w-14 h-14 bg-gradient-to-br from-blue-400 to-indigo-500 rounded-2xl flex items-center justify-center shadow-lg">
               <Users className="w-7 h-7 text-white" />

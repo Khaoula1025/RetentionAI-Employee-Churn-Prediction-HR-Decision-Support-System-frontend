@@ -1,7 +1,7 @@
 'use client'
 import React, { useState } from "react";
 import { useRouter } from "next/navigation";
-import { FileText, Mail, Lock, AlertCircle, CheckCircle, Sparkles, Layers, Shield } from "lucide-react";
+import { Users, Mail, Lock, AlertCircle, CheckCircle, TrendingUp, Shield, Target } from "lucide-react";
 
 function LoginPage() {
   const [identifier, setIdentifier] = useState('');
@@ -9,8 +9,7 @@ function LoginPage() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-    const router=useRouter()
-
+  const router = useRouter();
 
   async function handleSubmit() {
     setError('');
@@ -30,12 +29,10 @@ function LoginPage() {
 
       if (response.ok) {
         setMessage('Login successful!');
-        router.push('/Prediction')
+        router.push('/Prediction');
       } else {
-        // Handle validation errors from FastAPI
         if (data.detail) {
           if (Array.isArray(data.detail)) {
-            // FastAPI validation errors
             const errorMessages = data.detail.map(err => err.msg).join(', ');
             setError(errorMessages);
           } else if (typeof data.detail === 'string') {
@@ -62,76 +59,66 @@ function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-emerald-50 via-teal-50 to-cyan-100 flex items-center justify-center p-4 relative overflow-hidden">
-      {/* Floating geometric shapes */}
-      <div className="absolute top-20 left-10 w-32 h-32 bg-emerald-200/30 rounded-full blur-2xl animate-pulse"></div>
-      <div className="absolute bottom-20 right-10 w-40 h-40 bg-cyan-200/30 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-      <div className="absolute top-1/3 right-1/4 w-24 h-24 bg-teal-200/30 rounded-full blur-2xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 flex items-center justify-center p-4 relative overflow-hidden">
+      {/* Animated background elements */}
+      <div className="absolute top-20 left-10 w-64 h-64 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
+      <div className="absolute bottom-20 right-10 w-80 h-80 bg-indigo-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+      <div className="absolute top-1/3 right-1/4 w-48 h-48 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
 
       {/* Main Container */}
-      <div className="max-w-6xl w-full bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row relative z-10">
+      <div className="max-w-6xl w-full bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl overflow-hidden flex flex-col lg:flex-row relative z-10">
         
         {/* Left Section - Branding */}
-        <div className="lg:w-2/5 bg-gradient-to-br from-emerald-500 to-teal-600 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden">
-          {/* Abstract pattern */}
+        <div className="lg:w-2/5 bg-gradient-to-br from-blue-600 to-indigo-700 p-12 flex flex-col justify-center items-center text-white relative overflow-hidden">
+          {/* Decorative elements */}
           <div className="absolute inset-0 opacity-10">
-            {[...Array(20)].map((_, i) => (
-              <div
-                key={i}
-                className="absolute bg-white rounded-full"
-                style={{
-                  width: `${Math.random() * 100 + 50}px`,
-                  height: `${Math.random() * 100 + 50}px`,
-                  top: `${Math.random() * 100}%`,
-                  left: `${Math.random() * 100}%`,
-                  animation: `float ${Math.random() * 10 + 10}s infinite ease-in-out`,
-                  animationDelay: `${Math.random() * 5}s`
-                }}
-              />
-            ))}
+            <div className="absolute top-10 left-10 w-32 h-32 border-4 border-white rounded-2xl rotate-12"></div>
+            <div className="absolute bottom-20 right-10 w-40 h-40 border-4 border-white rounded-full"></div>
+            <div className="absolute top-1/2 left-1/4 w-24 h-24 border-4 border-white rounded-2xl -rotate-12"></div>
           </div>
 
           <div className="relative z-10 text-center">
             {/* Logo */}
             <div className="mb-8 inline-flex items-center justify-center">
               <div className="w-20 h-20 bg-white rounded-2xl shadow-xl flex items-center justify-center transform hover:rotate-12 transition-transform duration-300">
-                <FileText className="w-10 h-10 text-emerald-600" />
+                <Users className="w-10 h-10 text-blue-600" />
               </div>
             </div>
 
-            <h1 className="text-4xl font-bold mb-4">ArticleAI</h1>
-            <p className="text-lg text-emerald-50 mb-8">Transform your content with intelligent AI analysis</p>
+            <h1 className="text-4xl font-bold mb-4">Employee Attrition</h1>
+            <h2 className="text-2xl font-semibold mb-2">Predictor</h2>
+            <p className="text-lg text-blue-100 mb-8">AI-powered retention analysis and workforce insights</p>
 
             {/* Features */}
-            <div className="space-y-4 text-left">
+            <div className="space-y-4 text-left max-w-sm mx-auto">
               <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors">
-                <Sparkles className="w-6 h-6 flex-shrink-0" />
-                <span className="text-sm">AI-powered insights</span>
+                <TrendingUp className="w-6 h-6 flex-shrink-0" />
+                <span className="text-sm">Predictive Analytics</span>
               </div>
               <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors">
-                <Layers className="w-6 h-6 flex-shrink-0" />
-                <span className="text-sm">Multi-layer analysis</span>
+                <Target className="w-6 h-6 flex-shrink-0" />
+                <span className="text-sm">Personalized Retention Plans</span>
               </div>
               <div className="flex items-center space-x-3 bg-white/10 backdrop-blur-sm rounded-xl p-4 hover:bg-white/20 transition-colors">
                 <Shield className="w-6 h-6 flex-shrink-0" />
-                <span className="text-sm">Secure & private</span>
+                <span className="text-sm">Data-Driven Decisions</span>
               </div>
             </div>
           </div>
         </div>
 
         {/* Right Section - Form */}
-        <div className="lg:w-3/5 p-12 flex items-center justify-center">
+        <div className="lg:w-3/5 p-12 flex items-center justify-center bg-white">
           <div className="w-full max-w-md">
             <div className="mb-10">
               <h2 className="text-3xl font-bold text-gray-800 mb-2">Welcome Back</h2>
-              <p className="text-gray-500">Sign in to your account</p>
+              <p className="text-gray-600">Sign in to access your dashboard</p>
             </div>
 
             <div className="space-y-5">
               {/* Email or Username */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Email or Username</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Email or Username</label>
                 <div className="relative">
                   <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
@@ -139,7 +126,7 @@ function LoginPage() {
                     value={identifier}
                     onChange={(e) => setIdentifier(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-colors text-gray-800 bg-gray-50 hover:bg-white"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all text-gray-900 bg-white placeholder-gray-500"
                     placeholder="Enter your email or username"
                   />
                 </div>
@@ -147,7 +134,7 @@ function LoginPage() {
 
               {/* Password */}
               <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <label className="block text-sm font-semibold text-gray-700 mb-2">Password</label>
                 <div className="relative">
                   <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                   <input
@@ -155,7 +142,7 @@ function LoginPage() {
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
                     onKeyPress={handleKeyPress}
-                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-emerald-500 focus:outline-none transition-colors text-gray-800 bg-gray-50 hover:bg-white"
+                    className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:border-blue-500 focus:ring-2 focus:ring-blue-200 focus:outline-none transition-all text-gray-900 bg-white placeholder-gray-500"
                     placeholder="Enter your password"
                   />
                 </div>
@@ -163,24 +150,24 @@ function LoginPage() {
 
               {/* Forgot password */}
               <div className="flex justify-end">
-                <a href="#" className="text-sm text-emerald-600 hover:text-emerald-700 font-medium transition-colors">
+                <a href="#" className="text-sm text-blue-600 hover:text-blue-700 font-semibold transition-colors">
                   Forgot password?
                 </a>
               </div>
 
               {/* Error */}
               {error && (
-                <div className="flex items-center space-x-3 p-4 bg-red-50 border-l-4 border-red-500 rounded-lg">
-                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0" />
+                <div className="flex items-start space-x-3 p-4 bg-red-50 border-l-4 border-red-500 rounded-xl">
+                  <AlertCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
                   <p className="text-sm text-red-700">{error}</p>
                 </div>
               )}
 
               {/* Success */}
               {message && (
-                <div className="flex items-center space-x-3 p-4 bg-emerald-50 border-l-4 border-emerald-500 rounded-lg">
-                  <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0" />
-                  <p className="text-sm text-emerald-700">{message}</p>
+                <div className="flex items-start space-x-3 p-4 bg-green-50 border-l-4 border-green-500 rounded-xl">
+                  <CheckCircle className="w-5 h-5 text-green-500 flex-shrink-0 mt-0.5" />
+                  <p className="text-sm text-green-700">{message}</p>
                 </div>
               )}
 
@@ -188,11 +175,11 @@ function LoginPage() {
               <button
                 onClick={handleSubmit}
                 disabled={loading}
-                className="w-full bg-gradient-to-r from-emerald-500 to-teal-600 text-white py-4 rounded-xl font-semibold text-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5 active:translate-y-0 transition-all disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-xl font-bold text-lg shadow-xl hover:shadow-2xl hover:from-blue-700 hover:to-indigo-700 hover:-translate-y-0.5 active:translate-y-0 transition-all duration-200 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
               >
                 {loading ? (
                   <span className="flex items-center justify-center">
-                    <svg className="animate-spin h-5 w-5 mr-3" viewBox="0 0 24 24">
+                    <svg className="animate-spin h-6 w-6 mr-3" viewBox="0 0 24 24">
                       <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"></circle>
                       <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                     </svg>
@@ -204,10 +191,10 @@ function LoginPage() {
               </button>
 
               {/* Sign up link */}
-              <div className="text-center pt-4 border-t border-gray-200">
+              <div className="text-center pt-6 border-t border-gray-200">
                 <p className="text-sm text-gray-600">
                   Don't have an account?{' '}
-                  <a href="/SignUp" className="text-emerald-600 font-semibold hover:text-emerald-700 transition-colors">
+                  <a href="/SignUp" className="text-blue-600 font-bold hover:text-blue-700 transition-colors">
                     Create account
                   </a>
                 </p>
@@ -216,13 +203,6 @@ function LoginPage() {
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes float {
-          0%, 100% { transform: translateY(0) translateX(0); }
-          50% { transform: translateY(-20px) translateX(10px); }
-        }
-      `}</style>
     </div>
   );
 }
