@@ -101,6 +101,14 @@ function PredictionPage() {
     }
   };
 
+  // Helper function to get the risk probability percentage
+  const getRiskProbability = () => {
+    if (!result) return 0;
+    return parseFloat(result.churn_probability || result.probability || 0) * 100;
+  };
+
+  const riskPercentage = getRiskProbability();
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-indigo-900 p-4 md:p-8">
       <div className="max-w-7xl mx-auto">
@@ -143,7 +151,7 @@ function PredictionPage() {
                       value={formData.Age}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="e.g., 30"
                     />
                   </div>
@@ -183,7 +191,7 @@ function PredictionPage() {
                       value={formData.DistanceFromHome}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="km"
                     />
                   </div>
@@ -220,7 +228,7 @@ function PredictionPage() {
                       name="EducationField"
                       value={formData.EducationField}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white text-gray-900"
                     >
                       <option value="Life Sciences">Life Sciences</option>
                       <option value="Medical">Medical</option>
@@ -237,7 +245,7 @@ function PredictionPage() {
                       name="Department"
                       value={formData.Department}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white text-gray-900"
                     >
                       <option value="Sales">Sales</option>
                       <option value="Research & Development">Research & Development</option>
@@ -251,7 +259,7 @@ function PredictionPage() {
                       name="JobRole"
                       value={formData.JobRole}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white text-gray-900"
                     >
                       <option value="Sales Executive">Sales Executive</option>
                       <option value="Research Scientist">Research Scientist</option>
@@ -271,7 +279,7 @@ function PredictionPage() {
                       name="JobLevel"
                       value={formData.JobLevel}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all bg-white text-gray-900"
                     >
                       <option value="1">Entry Level</option>
                       <option value="2">Mid Level</option>
@@ -299,7 +307,7 @@ function PredictionPage() {
                       value={formData.MonthlyIncome}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="$"
                     />
                   </div>
@@ -312,7 +320,7 @@ function PredictionPage() {
                       value={formData.MonthlyRate}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="$"
                     />
                   </div>
@@ -325,7 +333,7 @@ function PredictionPage() {
                       value={formData.DailyRate}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="$"
                     />
                   </div>
@@ -338,7 +346,7 @@ function PredictionPage() {
                       value={formData.PercentSalaryHike}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="%"
                     />
                   </div>
@@ -349,7 +357,7 @@ function PredictionPage() {
                       name="StockOptionLevel"
                       value={formData.StockOptionLevel}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 transition-all bg-white text-gray-900"
                     >
                       <option value="0">None</option>
                       <option value="1">Low</option>
@@ -376,7 +384,7 @@ function PredictionPage() {
                       value={formData.TotalWorkingYears}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white text-gray-900 placeholder-gray-400"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="years"
                     />
                   </div>
@@ -389,7 +397,7 @@ function PredictionPage() {
                       value={formData.YearsAtCompany}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="years"
                     />
                   </div>
@@ -402,7 +410,7 @@ function PredictionPage() {
                       value={formData.YearsInCurrentRole}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="years"
                     />
                   </div>
@@ -415,7 +423,7 @@ function PredictionPage() {
                       value={formData.YearsSinceLastPromotion}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="years"
                     />
                   </div>
@@ -428,7 +436,7 @@ function PredictionPage() {
                       value={formData.YearsWithCurrManager}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="years"
                     />
                   </div>
@@ -441,7 +449,7 @@ function PredictionPage() {
                       value={formData.NumCompaniesWorked}
                       onChange={handleChange}
                       required
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-purple-500 focus:border-purple-500 transition-all bg-white text-gray-900 placeholder-gray-500"
                       placeholder="count"
                     />
                   </div>
@@ -476,7 +484,7 @@ function PredictionPage() {
                       name="OverTime"
                       value={formData.OverTime}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white text-gray-900"
                     >
                       <option value="No">No</option>
                       <option value="Yes">Yes</option>
@@ -489,7 +497,7 @@ function PredictionPage() {
                       name="EnvironmentSatisfaction"
                       value={formData.EnvironmentSatisfaction}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white text-gray-900"
                     >
                       <option value="1">Low</option>
                       <option value="2">Medium</option>
@@ -504,7 +512,7 @@ function PredictionPage() {
                       name="JobSatisfaction"
                       value={formData.JobSatisfaction}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white text-gray-900"
                     >
                       <option value="1">Low</option>
                       <option value="2">Medium</option>
@@ -519,7 +527,7 @@ function PredictionPage() {
                       name="JobInvolvement"
                       value={formData.JobInvolvement}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white text-gray-900"
                     >
                       <option value="1">Low</option>
                       <option value="2">Medium</option>
@@ -534,7 +542,7 @@ function PredictionPage() {
                       name="WorkLifeBalance"
                       value={formData.WorkLifeBalance}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white text-gray-900"
                     >
                       <option value="1">Bad</option>
                       <option value="2">Good</option>
@@ -549,7 +557,7 @@ function PredictionPage() {
                       name="RelationshipSatisfaction"
                       value={formData.RelationshipSatisfaction}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white text-gray-900"
                     >
                       <option value="1">Low</option>
                       <option value="2">Medium</option>
@@ -564,7 +572,7 @@ function PredictionPage() {
                       name="PerformanceRating"
                       value={formData.PerformanceRating}
                       onChange={handleChange}
-                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all"
+                      className="w-full px-4 py-3 border-2 border-gray-200 rounded-xl focus:ring-2 focus:ring-orange-500 focus:border-orange-500 transition-all bg-white text-gray-900"
                     >
                       <option value="1">Low</option>
                       <option value="2">Good</option>
@@ -610,13 +618,13 @@ function PredictionPage() {
               <>
                 {/* Probability Card */}
                 <div className={`rounded-3xl shadow-2xl p-8 ${
-                  parseFloat(result.probability || result.churn_probability) > 50
+                  riskPercentage > 50
                     ? 'bg-gradient-to-br from-red-500 via-rose-500 to-pink-600'
                     : 'bg-gradient-to-br from-green-500 via-emerald-500 to-teal-600'
                 } text-white transform hover:scale-105 transition-transform duration-300`}>
                   <div className="flex items-center justify-between mb-6">
                     <h3 className="text-2xl font-bold">Attrition Risk Assessment</h3>
-                    {parseFloat(result.probability || result.churn_probability) > 50 ? (
+                    {riskPercentage > 50 ? (
                       <AlertTriangle className="w-10 h-10" />
                     ) : (
                       <CheckCircle className="w-10 h-10" />
@@ -625,10 +633,10 @@ function PredictionPage() {
                   
                   <div className="text-center mb-6">
                     <div className="text-7xl font-black mb-3 drop-shadow-lg">
-                      {parseFloat(result.probability || result.churn_probability).toFixed(1)}%
+                      {riskPercentage.toFixed(1)}%
                     </div>
                     <div className="text-xl font-medium opacity-95">
-                      {parseFloat(result.probability || result.churn_probability) > 50
+                      {riskPercentage > 50
                         ? '⚠️ High Risk - Immediate Action Required'
                         : '✅ Low Risk - Employee Likely to Stay'}
                     </div>
@@ -638,16 +646,16 @@ function PredictionPage() {
                     <div className="flex items-center justify-between">
                       <span className="font-semibold text-lg">Risk Level:</span>
                       <span className="font-bold text-xl px-4 py-2 bg-white/25 rounded-xl">
-                        {parseFloat(result.probability || result.churn_probability) > 75 ? '🔴 Critical' :
-                         parseFloat(result.probability || result.churn_probability) > 50 ? '🟠 High' :
-                         parseFloat(result.probability || result.churn_probability) > 25 ? '🟡 Moderate' : '🟢 Low'}
+                        {riskPercentage > 75 ? '🔴 Critical' :
+                         riskPercentage > 50 ? '🟠 High' :
+                         riskPercentage > 25 ? '🟡 Moderate' : '🟢 Low'}
                       </span>
                     </div>
                   </div>
                 </div>
 
-                {/* Retention Strategies */}
-                {parseFloat(result.probability || result.churn_probability) > 50 && result.retention_strategies && (
+                {/* Retention Actions */}
+                {riskPercentage > 50 && result.retention_actions && (
                   <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-transform duration-300">
                     <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
                       <Shield className="w-7 h-7 mr-3 text-blue-600" />
@@ -662,20 +670,20 @@ function PredictionPage() {
                     </div>
                     
                     <div className="space-y-4 text-gray-700 leading-relaxed">
-                      {typeof result.retention_strategies === 'string' ? (
-                        <div className="whitespace-pre-wrap text-base">{result.retention_strategies}</div>
-                      ) : Array.isArray(result.retention_strategies) ? (
-                        <ul className="space-y-3">
-                          {result.retention_strategies.map((strategy, idx) => (
-                            <li key={idx} className="flex items-start p-4 bg-gray-50 rounded-xl hover:bg-gray-100 transition-colors">
-                              <ArrowRight className="w-5 h-5 mr-3 mt-0.5 text-blue-600 flex-shrink-0" />
-                              <span className="text-base">{strategy}</span>
-                            </li>
-                          ))}
-                        </ul>
-                      ) : (
-                        <div className="whitespace-pre-wrap text-base">{JSON.stringify(result.retention_strategies, null, 2)}</div>
-                      )}
+                      <div className="whitespace-pre-wrap text-base">{result.retention_actions}</div>
+                    </div>
+                  </div>
+                )}
+
+                {/* Low Risk Message */}
+                {riskPercentage <= 50 && result.message && (
+                  <div className="bg-white/95 backdrop-blur-sm rounded-3xl shadow-2xl p-8 transform hover:scale-105 transition-transform duration-300">
+                    <h3 className="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                      <CheckCircle className="w-7 h-7 mr-3 text-green-600" />
+                      Status
+                    </h3>
+                    <div className="bg-gradient-to-r from-green-50 to-emerald-50 border-l-4 border-green-500 p-5 rounded-r-2xl">
+                      <p className="text-base text-green-900 font-semibold">{result.message}</p>
                     </div>
                   </div>
                 )}
